@@ -1,9 +1,9 @@
 const { EmbedBuilder, InteractionResponse } = require('discord.js');
-const guildSettings = require('../schemas/guildSettings');
+const guildSettings = require('../schemas/Bump');
 const ERROR_CHANNEL_ID = '1300124658758320128';
 
 module.exports = {
-    customId: 'advertisementMdl',
+    customId: 'serverMessageMdl',
     userPermissions: [],
     botPermissions: [],
 
@@ -21,14 +21,14 @@ module.exports = {
             if (!guildConfig) {
                 guildConfig = await new guildSettings({
                     guildID: guildId,
-                    advertisement: desc,
+                    message: desc,
                 })
 
                 await guildConfig.save();
             } else {
                 await guildSettings.findOneAndUpdate(
                     { guildID: guildId },
-                    { advertisement: desc },
+                    { message: desc },
                     { new: true }
                 );
             }
