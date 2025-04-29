@@ -11,9 +11,8 @@ module.exports =
  */
 async (client, message) => {
     const Staff = [
-        "1002142393442762792",
-        "1203399625055277119",
-        "603783927760683039",
+        "1130886272550981662",
+        "1302806745294307452",
     ];
 
     if (!Staff.includes(message.author.id)) {
