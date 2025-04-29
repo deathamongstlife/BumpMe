@@ -1,0 +1,13 @@
+{
+  "dependencies": {
+    "colors": "^1.4.0",
+    "discord": "^0.8.2",
+    "discord.js": "^14.19.2",
+    "dotenv": "^16.5.0",
+    "moment": "^2.30.1",
+    "mongoose": "^8.14.0",
+    "node-cron": "^3.0.3",
+    "pm2": "^6.0.5",
+    "topgg-autoposter": "^2.0.2"
+  }
+}

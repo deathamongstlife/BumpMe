@@ -1,0 +1,20 @@
+{
+  "embedColorSuccess": "00D26A",
+  "embedColorWarning": "FFCC4D",
+  "embedColorError": "FB2F61",
+  "embedErrorMessage": "`❌` An error occurred!",
+  "commandDevOnly": "`❌` This command can only be executed by developers.",
+  "commandTestMode": "`❌` This is in development and cannot be executed in this server.",
+  "commandPremiumOnly": "<:Key:1232757820672446545> This command requires premium.",
+  "userNoPermissions": "`❌` You do not have enough permissions to execute this command.",
+  "botNoPermissions": "`❌` I do not have enough permissions to execute this command.",
+  "hasHigherRolePosition": "`❌` This person has a higher role than you have or has the same role as you have.",
+  "unableToInteractWithYourself": "`❌` You cannot do that to yourself.",
+  "cannotUseButton": "`❌` You cannot use this button.",
+  "cannotFindRole": "`❌` I cannot find this role.",
+  "cannotFindChannel": "`❌` I cannot find this channel.",
+  "cannotFindUser": "`❌` I cannot find this user.",
+  "cannotUseSelect": "`❌` You cannot use this select menu.",
+  "noSetup": "`❌` No setup completed for this command!",
+  "noUserDefined": "`❌` Please define a user."
+}
