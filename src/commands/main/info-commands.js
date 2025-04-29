@@ -47,7 +47,7 @@ module.exports = {
             const embed = new EmbedBuilder()
                 .setTitle('BumpMe Information')
                 .addFields(
-                    { name: '<:members:1270117913038426113> • Developer Information', value: `\`\`\`Developer   ➜ @axylis_dev\nID          ➜ 1002142393442762792\nOwner       ➜ @bugs.bunny12\nID          ➜ 1203399625055277119\`\`\`` },
+                    { name: '<:members:1270117913038426113> • Developer Information', value: `\`\`\`Developer   ➜ @xgg69420x\nID          ➜ 1302806745294307452\nOwner       ➜ @the_mf_princess\nID          ➜ 1130886272550981662\`\`\`` },
                     { name: '<:pin:1270117914481262634> • Bot Information', value: `\`\`\`Name        ➜ ${client.user.tag}\nID          ➜ ${client.user.id}\nPing        ➜ ${client.ws.ping}ms\nPrefix      ➜ /\`\`\`` },
                     { name: '<:rocket:1270119276442812599> • Bot Stats', value: `\`\`\`Total Servers ➜ ${client.guilds.cache.size}\nTotal Users   ➜ ${totalMembers}\nUptime        ➜ ${uptime}\`\`\`` }
                 )
