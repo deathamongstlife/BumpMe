@@ -20,4 +20,4 @@ const bumpSchema = new Schema({
   bannerURL: { type: String, default: null }, // Field for banner image URL
 });
 
-module.exports = model("guildSettings", bumpSchema);
+module.exports = model("guildConfig", bumpSchema);
