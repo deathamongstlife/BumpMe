@@ -550,7 +550,7 @@ module.exports = {
                 },
                 {
                     name: "> Did you know?",
-                    value: `${Dot} You can hide your bump channel and customize your advertisement with many features by purchasing [**premium**](https://www.bumping.ltd/premium). \n` +
+                    value: `${Dot} You can hide your bump channel and customize your advertisement with many features by purchasing premium in the support server! \n` +
                     `${Dot} You can get **FREE** Premium by voting for us on [**Top.gg**](https://top.gg/bot/1265343375054340160)`
                 }
             )
