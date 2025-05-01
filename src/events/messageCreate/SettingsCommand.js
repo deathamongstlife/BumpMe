@@ -26,7 +26,7 @@ module.exports = async (client, message) => {
         await clientMongo.connect();
 
         // Access the database
-        const db = clientMongo.db('your-database-name'); // Replace with your database name
+        const db = clientMongo.db('*'); // Replace with your database name
         const guildInfoCollection = db.collection('guild-info'); // The collection containing guild info
         const guildSettingsCollection = db.collection('guildSettings'); // The collection containing guild settings
 
