@@ -478,7 +478,7 @@ module.exports = {
         .addFields(
             {
                 name: "> Server:",
-                value: `${dotEmoji} \`${interaction.guild.name}\``
+                value: `${dotEmoji} \`${interaction.guild.name}  (${interaction.guild.id})\``
             },
             {
                 name: "> Auto?:",
