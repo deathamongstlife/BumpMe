@@ -1,12 +1,17 @@
-const { Client, Message } = require('discord.js');
-const { MongoClient } = require('mongodb');
+const { Client, Message, EmbedBuilder } = require("discord.js");
+const mongoose = require("mongoose");
+const GuildInfo = require("../../schemas/Bump");
+const GuildSettings = require("../../schemas/Bump"); // Your existing schema for settings
 
-// Hardcoded MongoDB connection string
-const mongoURI = 'mongodb+srv://axylis:ilWZa12HCUA399NZ@globalnetwork.qvpr9b8.mongodb.net/';
-
-module.exports = async (client, message) => {
+module.exports =
+/**
+ * 
+ * @param {Client} client 
+ * @param {Message} message 
+ */
+async (client, message) => {
     const Staff = [
-        "1130886272550981662", // Example staff IDs
+        "1130886272550981662",
         "1302806745294307452",
         "1358608667686994120",
     ];
@@ -23,35 +28,46 @@ module.exports = async (client, message) => {
     }
 
     try {
-        // Connect to MongoDB using the hardcoded MongoClient
-        const clientMongo = new MongoClient(mongoURI);
-        await clientMongo.connect();
-
-        // Access the database
-        const db = clientMongo.db('your-database-name'); // Replace with your database name
-        const guildInfoCollection = db.collection('guild-info'); // The collection containing guild info
-        const guildSettingsCollection = db.collection('guildSettings'); // The collection containing guild settings
-
-        // Query for the guild ID in the guild-info collection
-        const guildInfo = await guildInfoCollection.findOne({ guildID: guildId });
+        // Querying guild-info for basic details
+        const guildInfo = await GuildInfo.findOne({ guildID: guildId });
         if (!guildInfo) {
             return message.reply(`❗ No guild info found for ID: \`${guildId}\``);
         }
 
-        // Query for the guild ID in the guildSettings collection
-        const guildSettings = await guildSettingsCollection.findOne({ guildID: guildId });
+        // Querying guildSettings for additional settings
+        const guildSettings = await GuildSettings.findOne({ guildID: guildId });
         if (!guildSettings) {
             return message.reply(`❗ No settings found for guild ID: \`${guildId}\``);
         }
 
-        // Inform the user that the guild was found
-        message.reply(`✅ Guild with ID: \`${guildId}\` has been found in the database.`);
+        // Fetching owner info
+        const ownerUser = await client.users.fetch(guildInfo.ownerID).catch(() => null);
+        const ownerTag = ownerUser ? `${ownerUser.tag} (${ownerUser.id})` : guildInfo.ownerID;
 
-        // Close the MongoDB connection
-        await clientMongo.close();
+        // Creating embed with combined data
+        const embed = new EmbedBuilder()
+            .setTitle("📋 Guild Settings")
+            .setColor("Blue")
+            .setThumbnail(guildInfo.iconURL || client.user.displayAvatarURL())
+            .addFields(
+                { name: "Guild Name", value: guildInfo.guildName, inline: true },
+                { name: "Guild ID", value: guildInfo.guildID, inline: true },
+                { name: "Owner", value: ownerTag, inline: true },
+                { name: "Managers", value: guildInfo.Managers.length > 0 ? guildInfo.Managers.map(id => `<@${id}>`).join(", ") : "None" },
+                { name: "Approved", value: guildSettings.approved ? "Yes" : "No", inline: true },
+                { name: "Bump Enabled", value: guildSettings.enabled ? "Yes" : "No", inline: true },
+                { name: "Bump Channel", value: guildSettings.channelID || "Not Set", inline: true },
+                { name: "Invite Channel", value: guildSettings.inviteChannelID || "Not Set", inline: true },
+                { name: "Bump Count", value: guildSettings.BumpCount.toString(), inline: true },
+                { name: "Cooldown End", value: guildSettings.cooldownEnd ? new Date(guildSettings.cooldownEnd).toLocaleString() : "Not Set", inline: true }
+            )
+            .setFooter({ text: `Requested by ${message.author.tag}`, iconURL: message.author.displayAvatarURL() })
+            .setTimestamp();
+
+        await message.reply({ embeds: [embed] });
 
     } catch (err) {
-        console.error(`Error checking for guild ${guildId}:`, err);
-        message.reply("❗ There was an error while trying to find the guild.");
+        console.error(`Error fetching settings for guild ${guildId}:`, err);
+        message.reply("❗ There was an error retrieving the guild settings.");
     }
 };
