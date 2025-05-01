@@ -343,7 +343,7 @@ module.exports = {
                 .setTitle('Missing Setup Requirements')
                 .setDescription(errorMessage)
             	.setFooter({
-                    text: `Setup your server with our new dashboard, run /dashboard to continue.`
+                    text: `If you need help,join our support server`
                 })
             return await interaction.editReply({ embeds: [errorEmbed], ephemeral: false });
         }
