@@ -47,8 +47,8 @@ module.exports = {
             const embed = new EmbedBuilder()
                 .setTitle('BumpMe Information')
                 .addFields(
-                    { name: '<:members:1367367425674448976> • Developer Information', value: `\`\`\`Developer   ➜ @axylis_dev\nID          ➜ 1002142393442762792\nCo-Developer   ➜ @xgg69420x\nID          ➜ 1302806745294307452\`\`\`` },
-                    { name: '<:members:1367367425674448976> • Owner Information', value: `\`\`\`Owner       ➜ @the_mf_princess\nID          ➜ 1130886272550981662\nCo-Owner       ➜ @xgg69420x\nID          ➜ 1302806745294307452\`\`\`` },
+                    { name: '<:members:1367367425674448976> • Developer Information', value: `\`\`\`Developer   ➜ @axylis_dev\nID          ➜ 1002142393442762792\nCo-Developer➜ @xgg69420x\nID          ➜ 1302806745294307452\`\`\`` },
+                    { name: '<:members:1367367425674448976> • Owner Information', value: `\`\`\`Owner       ➜ @the_mf_princess\nID          ➜ 1130886272550981662\nCo-Owner    ➜ @xgg69420x\nID          ➜ 1302806745294307452\`\`\`` },
                     { name: '<:pin:1367367193389568032> • Bot Information', value: `\`\`\`Name        ➜ ${client.user.tag}\nID          ➜ ${client.user.id}\nPing        ➜ ${client.ws.ping}ms\nPrefix      ➜ /\`\`\`` },
                     { name: '<:rocket:> • Bot Stats', value: `\`\`\`Total Servers ➜ ${client.guilds.cache.size}\nTotal Users   ➜ ${totalMembers}\nUptime        ➜ ${uptime}\`\`\`` }
                 )
