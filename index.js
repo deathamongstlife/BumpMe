@@ -78,11 +78,11 @@ client.rest.on('response', () => {
 
 // Function to send the API request count to a specific channel every 10 minutes
 setInterval(() => {
-   console.log("Yes")
+   console.log("Gathering API data")
   const channel = client.channels.cache.get(CHANNEL_ID);
   if (channel) {
     if (apiRequestCount > 5000) {
-        channel.send(`<@1002142393442762792>, you are getting close to the rate limit (10k) \n Current Count ${apiRequestCount}`)
+        channel.send(`<@1302806745294307452>, you are getting close to the rate limit (10k) \n Current Count ${apiRequestCount}`)
     } else {
         channel.send(`API requests in the last 10 minutes: ${apiRequestCount}`);
     }
