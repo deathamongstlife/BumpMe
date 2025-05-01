@@ -46,7 +46,6 @@ async (client, message) => {
                 { name: "Guild Name", value: guildData.guildName, inline: true },
                 { name: "Guild ID", value: guildData.guildID, inline: true },
                 { name: "Owner", value: ownerTag, inline: true },
-                { name: "Managers", value: guildData.Managers.length > 0 ? guildData.Managers.map(id => `<@${id}>`).join(", ") : "None" },
                 { name: "Approved", value: guildData.approved ? "Yes" : "No", inline: true },
                 { name: "Bump Enabled", value: guildData.enabled ? "Yes" : "No", inline: true },
                 { name: "Bump Channel", value: guildData.channelID || "Not Set", inline: true },
