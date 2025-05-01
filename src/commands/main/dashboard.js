@@ -7,4 +7,5 @@ module.exports = {
    run: async (client, interaction) => {
        interaction.reply({ content: `You can edit your server settings here at https://www.bumping.ltd/server/${interaction.guild.id}/edit .`})
     },
+    deleted: true
 };
