@@ -341,12 +341,14 @@ module.exports = {
             const errorEmbed = new EmbedBuilder()
                 .setColor("#fe4248")
                 .setTitle('Missing Setup Requirements')
-                .setDescription(errorMessage)
-            	.setFooter({
-                    text: `If you need help,join our support server`
-                })
-            return await interaction.editReply({ embeds: [errorEmbed], ephemeral: false });
-        }
+                .setFooter({
+                    text: `If you need help, join our support server`
+                });
+
+            if (errorMessage && errorMessage.length > 0) {
+                errorEmbed.setDescription(errorMessage);
+            }
+
 
         const isUserBlacklisted = await BlacklistedUsersSchema.exists({ userID: interaction.user.id });
         if (isUserBlacklisted) {
