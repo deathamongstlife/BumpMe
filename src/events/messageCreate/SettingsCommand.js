@@ -1,5 +1,5 @@
 const { Client, Message, EmbedBuilder } = require("discord.js");
-const Bump = require("../../schemas/Bump"); // Combined schema containing guild info and settings
+const Bump = require("../../schemas/Bump"); // Combined schema
 const PremiumGuild = require("../../schemas/PremiumGuild"); // Premium schema
 
 module.exports =
@@ -35,8 +35,11 @@ async (client, message) => {
 
         const isPremiumServer = await PremiumGuild.findOne({ guildID: guildId });
 
+        const guild = client.guilds.cache.get(guildId);
+        const guildName = guild ? guild.name : "Unknown Guild";
+
         const embed = new EmbedBuilder()
-            .setTitle("📋 Guild Configuration")
+            .setTitle(`📋 Settings for ${guildName}`)
             .setColor(guildData.hexColor || "Blue")
             .setThumbnail(client.user.displayAvatarURL())
             .addFields(
