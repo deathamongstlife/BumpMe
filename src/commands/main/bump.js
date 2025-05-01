@@ -232,8 +232,8 @@ async function autobumpGuild(client, guildId) {
         if (!invite) return;
 
         const bumpData = {
-            guildId: guildId,  // Getting the guild (server) ID
-            userId: client.user.id,    // Getting the user ID (assuming the interaction initiator is the user)
+            guildId: guildId,
+            userId: client.user.id,
             serverName,
             memberCount,
             createdAt,
@@ -245,11 +245,30 @@ async function autobumpGuild(client, guildId) {
 
         console.log(`[PREMIUM DATA]: \n `, bumpData)
 
-        await BumpQueue.create(bumpData); // Save the bump data to the queue
+        await BumpQueue.create(bumpData);
+
+        // Embed log for autobump
+        const supportChannel = client.channels.cache.get('1299841923321696266');
+        if (supportChannel) {
+            const dotEmoji = '<:arrow:1307458715473154048>';
+            const embed = new EmbedBuilder()
+                .setTitle("New Bump")
+                .addFields(
+                    { name: "> Server:", value: `${dotEmoji} \`${guild.name} (${guild.id})\`` },
+                    { name: "> Auto?:", value: `${dotEmoji} \`True\`` },
+                    { name: "> Bumped By:", value: `${dotEmoji} \`BumpMe\`` }
+                )
+                .setThumbnail(guild.iconURL())
+                .setColor("#fe4248")
+                .setImage("https://media.discordapp.net/attachments/1253798954928443503/1295769391102693517/New_Project_3.png?ex=670fdac9&is=670e8949&hm=aae1c7bc8668312c8e251753edb206eb1b2b637f7593c3fcd4266f23baab8fad&=&format=webp&quality=lossless&width=1207&height=73");
+
+            await supportChannel.send({ embeds: [embed] });
+        }
     } catch (error) {
         await logError(client, error, `Auto-bump for guild ${guildId}`);
     }
 }
+
 
 
 
