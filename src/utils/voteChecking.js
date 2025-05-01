@@ -22,7 +22,7 @@ function generatePremiumCode() {
 const VoteReminder = async (client) => {
     // Fetch votes that are not enabled
     let duration;
-    const votes = await VoteSchema.find({ enabled: false });
+    const votes = await VoteSchema.find({ enabled: true });
 
     // Iterate through each vote
     for (const vote of votes) {
