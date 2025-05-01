@@ -1,7 +1,6 @@
 const { Client, Message, EmbedBuilder } = require("discord.js");
 const mongoose = require("mongoose");
-const GuildInfo = require("../../schemas/Bump");
-const GuildSettings = require("../../schemas/Bump"); // Your existing schema for settings
+const Bump = require("../../schemas/Bump"); // Combined schema containing guild info and settings
 
 module.exports =
 /**
@@ -28,38 +27,32 @@ async (client, message) => {
     }
 
     try {
-        // Querying guild-info for basic details
-        const guildInfo = await GuildInfo.findOne({ guildID: guildId });
-        if (!guildInfo) {
-            return message.reply(`❗ No guild info found for ID: \`${guildId}\``);
-        }
-
-        // Querying guildSettings for additional settings
-        const guildSettings = await GuildSettings.findOne({ guildID: guildId });
-        if (!guildSettings) {
-            return message.reply(`❗ No settings found for guild ID: \`${guildId}\``);
+        // Querying Bump schema for combined guild info and settings
+        const guildData = await Bump.findOne({ guildID: guildId });
+        if (!guildData) {
+            return message.reply(`❗ No data found for guild ID: \`${guildId}\``);
         }
 
         // Fetching owner info
-        const ownerUser = await client.users.fetch(guildInfo.ownerID).catch(() => null);
-        const ownerTag = ownerUser ? `${ownerUser.tag} (${ownerUser.id})` : guildInfo.ownerID;
+        const ownerUser = await client.users.fetch(guildData.ownerID).catch(() => null);
+        const ownerTag = ownerUser ? `${ownerUser.tag} (${ownerUser.id})` : guildData.ownerID;
 
-        // Creating embed with combined data
+        // Creating embed with data
         const embed = new EmbedBuilder()
             .setTitle("📋 Guild Settings")
             .setColor("Blue")
-            .setThumbnail(guildInfo.iconURL || client.user.displayAvatarURL())
+            .setThumbnail(guildData.iconURL || client.user.displayAvatarURL())
             .addFields(
-                { name: "Guild Name", value: guildInfo.guildName, inline: true },
-                { name: "Guild ID", value: guildInfo.guildID, inline: true },
+                { name: "Guild Name", value: guildData.guildName, inline: true },
+                { name: "Guild ID", value: guildData.guildID, inline: true },
                 { name: "Owner", value: ownerTag, inline: true },
-                { name: "Managers", value: guildInfo.Managers.length > 0 ? guildInfo.Managers.map(id => `<@${id}>`).join(", ") : "None" },
-                { name: "Approved", value: guildSettings.approved ? "Yes" : "No", inline: true },
-                { name: "Bump Enabled", value: guildSettings.enabled ? "Yes" : "No", inline: true },
-                { name: "Bump Channel", value: guildSettings.channelID || "Not Set", inline: true },
-                { name: "Invite Channel", value: guildSettings.inviteChannelID || "Not Set", inline: true },
-                { name: "Bump Count", value: guildSettings.BumpCount.toString(), inline: true },
-                { name: "Cooldown End", value: guildSettings.cooldownEnd ? new Date(guildSettings.cooldownEnd).toLocaleString() : "Not Set", inline: true }
+                { name: "Managers", value: guildData.Managers.length > 0 ? guildData.Managers.map(id => `<@${id}>`).join(", ") : "None" },
+                { name: "Approved", value: guildData.approved ? "Yes" : "No", inline: true },
+                { name: "Bump Enabled", value: guildData.enabled ? "Yes" : "No", inline: true },
+                { name: "Bump Channel", value: guildData.channelID || "Not Set", inline: true },
+                { name: "Invite Channel", value: guildData.inviteChannelID || "Not Set", inline: true },
+                { name: "Bump Count", value: guildData.BumpCount.toString(), inline: true },
+                { name: "Cooldown End", value: guildData.cooldownEnd ? new Date(guildData.cooldownEnd).toLocaleString() : "Not Set", inline: true }
             )
             .setFooter({ text: `Requested by ${message.author.tag}`, iconURL: message.author.displayAvatarURL() })
             .setTimestamp();
