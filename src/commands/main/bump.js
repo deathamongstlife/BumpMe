@@ -541,6 +541,6 @@ module.exports = {
         .setDescription("🚀 [**Join Discord Promotions and get growing your server like never before.**](https://discord.gg/RJh763aF)")
         
         await interaction.editReply({embeds: [successEmbed, embed]})
-    },
+    }
     startAutobump, // Export the startAutobump function
 }
