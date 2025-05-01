@@ -56,7 +56,7 @@ async (client, message) => {
 
         if (logChannel && logChannel.isTextBased()) {
             const logEmbed = new EmbedBuilder()
-                .setTitle("Command Ran")
+                .setTitle("Premium Given")
                 .setColor(color)
                 .setDescription(
                     `**Who**: ${message.author}\n` +
