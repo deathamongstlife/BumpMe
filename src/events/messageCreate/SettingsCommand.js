@@ -1,6 +1,8 @@
 const { Client, Message } = require('discord.js');
 const { MongoClient } = require('mongodb');
-const { mongoURI } = require('../../../.env'); // Make sure your .env file contains the connection string
+
+// Hardcoded MongoDB connection string
+const mongoURI = 'mongodb+srv://axylis:ilWZa12HCUA399NZ@globalnetwork.qvpr9b8.mongodb.net/';
 
 module.exports = async (client, message) => {
     const Staff = [
@@ -21,12 +23,12 @@ module.exports = async (client, message) => {
     }
 
     try {
-        // Connect to MongoDB using the MongoClient
+        // Connect to MongoDB using the hardcoded MongoClient
         const clientMongo = new MongoClient(mongoURI);
         await clientMongo.connect();
 
         // Access the database
-        const db = clientMongo.db('*'); // Replace with your database name
+        const db = clientMongo.db('your-database-name'); // Replace with your database name
         const guildInfoCollection = db.collection('guild-info'); // The collection containing guild info
         const guildSettingsCollection = db.collection('guildSettings'); // The collection containing guild settings
 
