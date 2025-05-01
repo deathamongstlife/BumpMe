@@ -161,7 +161,7 @@ module.exports = {
                 // Save the bump channel in the database
                 await CreateBumpSchema(guildId, bumpChannel.id);
 
-                embed.setDescription(`<:tick:1292425348008382504> Done, Bump channel has been set to: <#${bumpChannel.id}>`);
+                embed.setDescription(`<:tick:1367369982802919434> Done, Bump channel has been set to: <#${bumpChannel.id}>`);
                 await interaction.followUp({ embeds: [embed], ephemeral: true });
                 break;
             }
@@ -179,7 +179,7 @@ module.exports = {
                 // Save the invite channel in the database
                 await CreateBumpSchema(guildId, null, inviteChannel.id);
 
-                embed.setDescription(`<:tick:1292425348008382504> Done, invite channel has been set to: <#${inviteChannel.id}>`);
+                embed.setDescription(`<:tick:1367369982802919434> Done, invite channel has been set to: <#${inviteChannel.id}>`);
                 await interaction.followUp({ embeds: [embed], ephemeral: true });
                 break;
             }
