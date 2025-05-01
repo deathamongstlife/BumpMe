@@ -341,13 +341,12 @@ module.exports = {
             const errorEmbed = new EmbedBuilder()
                 .setColor("#fe4248")
                 .setTitle('Missing Setup Requirements')
-                .setFooter({
-                    text: `If you need help, join our support server`
-                });
-
-            if (errorMessage && errorMessage.length > 0) {
-                errorEmbed.setDescription(errorMessage);
-            }
+                .setDescription(errorMessage || "No additional details provided.")
+            	.setFooter({
+                    text: If you need help,join our support server
+                })
+            return await interaction.editReply({ embeds: [errorEmbed], ephemeral: false });
+        }
 
 
         const isUserBlacklisted = await BlacklistedUsersSchema.exists({ userID: interaction.user.id });
@@ -410,6 +409,8 @@ module.exports = {
 
         const everyoneRole = interaction.guild.roles.everyone;
         const missingPermissions = [];
+        const dotEmoji = '<:arrow:1307458715473154048>';
+
         if (!bumpChannel.permissionsFor(everyoneRole).has('ViewChannel')) {
             missingPermissions.push(`${dotEmoji} View Channel (@everyone)`);
         }
@@ -541,6 +542,6 @@ module.exports = {
         .setDescription("🚀 [**Join Discord Promotions and get growing your server like never before.**](https://discord.gg/RJh763aF)")
         
         await interaction.editReply({embeds: [successEmbed, embed]})
-    }
+    },
     startAutobump, // Export the startAutobump function
 }
