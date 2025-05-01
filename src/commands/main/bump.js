@@ -317,7 +317,7 @@ module.exports = {
         
         if (!bumpConfig || !bumpConfig.enabled) {
             let errorMessage = '';
-            const dotEmoji = '<:Arrow:1281677131004252191>';
+            const dotEmoji = '<:arrow:1307458715473154048>';
             if (!bumpConfig) {
                 errorMessage += `${dotEmoji} \`Required\` **Server Description** \n`;
                 errorMessage += `${dotEmoji} \`Required\` **Bump Channel** \n`;
@@ -351,7 +351,7 @@ module.exports = {
         const isUserBlacklisted = await BlacklistedUsersSchema.exists({ userID: interaction.user.id });
         if (isUserBlacklisted) {
             const Embed = new EmbedBuilder()
-            .setTitle("<:Report:1262017693846999111> User Suspended")
+            .setTitle("<:report:1367365882220777522> User Suspended")
             .setDescription("You have been suspended from the use of **BumpMe**. \n > *For more information, please join the support server [here](https://discord.gg/f75Qytv9cT)*.")
             .setColor('#fe4248')
             
@@ -361,7 +361,7 @@ module.exports = {
         const isBlacklisted = await BlacklistSchema.exists({ guildID: guildId });
         if (isBlacklisted) {
             const Embed = new EmbedBuilder()
-            .setTitle("<:Report:1262017693846999111> Guild Suspended")
+            .setTitle("<:report:1367365882220777522> Guild Suspended")
             .setDescription("Your guild has been suspended from the use of **BumpMe**. \n > *For more information, please join the support server [here](https://discord.gg/f75Qytv9cT)*.")
             .setColor('#fe4248')
             
@@ -391,7 +391,7 @@ module.exports = {
        const bumpChannel = client.channels.cache.get(bumpConfig.channelID);
 
         if (!bumpChannel) {
-            const dotEmoji = '<:Arrow:1281677131004252191>';
+            const dotEmoji = '<:arrow:1307458715473154048>';
             const errEmbed = new EmbedBuilder()
                 .setColor('#fe4248')
                 .setTitle('Error Updating Bump Channel')
@@ -408,7 +408,7 @@ module.exports = {
 
         const everyoneRole = interaction.guild.roles.everyone;
         const missingPermissions = [];
-        const dotEmoji = '<:Arrow:1281677131004252191>';
+        const dotEmoji = '<:arrow:1307458715473154048>';
 
         if (!bumpChannel.permissionsFor(everyoneRole).has('ViewChannel')) {
             missingPermissions.push(`${dotEmoji} View Channel (@everyone)`);
@@ -512,7 +512,7 @@ module.exports = {
         const totalServers = client.guilds.cache.size - 1;
         const enabledServers = await BumpSchema.countDocuments({ enabled: true });
         const totalMembers = client.guilds.cache.reduce((acc, guild) => acc + guild.memberCount, 0).toLocaleString();
-        const Dot = '<:Arrow:1281677131004252191>';
+        const Dot = '<:arrow:1307458715473154048>';
         const EstimatedBumpTime = Math.floor(Date.now() /1000 +60)
 
         const successEmbed = new EmbedBuilder()
