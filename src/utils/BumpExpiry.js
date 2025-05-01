@@ -21,7 +21,7 @@ const BumpExpiry = async (client) => {
                         },
                         {
                             name: "> **Did You Know?**",
-                            value: `${DotEmoji2} You can now **AUTO SHARE** with [**PREMIUM**](https://bumping.ltd/premium)`
+                            value: `${DotEmoji2} You can now **AUTO SHARE** with **PREMIUM**! Join support server for more info!`
                         }
                     )
                 	.setImage('https://media.discordapp.net/attachments/1265026826473046038/1281679675168395347/Bump2You_1.png?ex=66dc98b7&is=66db4737&hm=6240b6fefd2343a77990b1b14b12686f55da7e40c6f956dec1aa1023eef05154&=&format=webp&quality=lossless&width=1295&height=78')
