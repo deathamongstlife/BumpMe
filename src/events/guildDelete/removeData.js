@@ -27,12 +27,12 @@ module.exports = async (client, guild) => {
     const logChannel = client.channels.cache.get(logChannelId);
     if (!logChannel) return console.error('Log channel not found');
 
-    const Emoji = "<:ServerJoined:1266120586405613648>";
+    const Emoji = "<:ServerJoined:1367368461625327696>";
 
     // Create the embed
     const embed = new EmbedBuilder()
         .setTitle("Server Left")
-        .setDescription(`**${guild.name}** has removed BumpMe. \n you are now at ${client.guilds.cache.size} servers.`)
+        .setDescription(`**${guild.name} (${guild.id})** has removed BumpMe. \n you are now at ${client.guilds.cache.size} servers.`)
         .setThumbnail(guild.iconURL())
         .setColor('#00FF00'); // Optional: Set a color for the embed
 
