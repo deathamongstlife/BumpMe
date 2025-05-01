@@ -1,7 +1,6 @@
-const { Client, Message, EmbedBuilder } = require("discord.js");
-const mongoose = require("mongoose");
+const { Client, Message } = require("discord.js");
 const GuildInfo = require("../../schemas/guild-info");
-const GuildSettings = require("../../schemas/guildSettings"); // Your existing schema for settings
+const GuildSettings = require("../../schemas/guildSettings");
 
 module.exports =
 /**
@@ -11,7 +10,7 @@ module.exports =
  */
 async (client, message) => {
     const Staff = [
-        "1130886272550981662",
+        "1130886272550981662", // Example staff IDs
         "1302806745294307452",
         "1358608667686994120",
     ];
@@ -40,34 +39,11 @@ async (client, message) => {
             return message.reply(`❗ No settings found for guild ID: \`${guildId}\``);
         }
 
-        // Fetching owner info
-        const ownerUser = await client.users.fetch(guildInfo.ownerID).catch(() => null);
-        const ownerTag = ownerUser ? `${ownerUser.tag} (${ownerUser.id})` : guildInfo.ownerID;
-
-        // Creating embed with combined data
-        const embed = new EmbedBuilder()
-            .setTitle("📋 Guild Settings")
-            .setColor("Blue")
-            .setThumbnail(guildInfo.iconURL || client.user.displayAvatarURL())
-            .addFields(
-                { name: "Guild Name", value: guildInfo.guildName, inline: true },
-                { name: "Guild ID", value: guildInfo.guildID, inline: true },
-                { name: "Owner", value: ownerTag, inline: true },
-                { name: "Managers", value: guildInfo.Managers.length > 0 ? guildInfo.Managers.map(id => `<@${id}>`).join(", ") : "None" },
-                { name: "Approved", value: guildSettings.approved ? "Yes" : "No", inline: true },
-                { name: "Bump Enabled", value: guildSettings.enabled ? "Yes" : "No", inline: true },
-                { name: "Bump Channel", value: guildSettings.channelID || "Not Set", inline: true },
-                { name: "Invite Channel", value: guildSettings.inviteChannelID || "Not Set", inline: true },
-                { name: "Bump Count", value: guildSettings.BumpCount.toString(), inline: true },
-                { name: "Cooldown End", value: guildSettings.cooldownEnd ? new Date(guildSettings.cooldownEnd).toLocaleString() : "Not Set", inline: true }
-            )
-            .setFooter({ text: `Requested by ${message.author.tag}`, iconURL: message.author.displayAvatarURL() })
-            .setTimestamp();
-
-        await message.reply({ embeds: [embed] });
+        // Inform the user that the guild was found
+        message.reply(`✅ Guild with ID: \`${guildId}\` has been found in the database.`);
 
     } catch (err) {
-        console.error(`Error fetching settings for guild ${guildId}:`, err);
-        message.reply("❗ There was an error retrieving the guild settings.");
+        console.error(`Error checking for guild ${guildId}:`, err);
+        message.reply("❗ There was an error while trying to find the guild.");
     }
 };
