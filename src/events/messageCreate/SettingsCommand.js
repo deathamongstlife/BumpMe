@@ -1,11 +1,10 @@
-const { Client, Message, EmbedBuilder } = require('discord.js');
-const GuildSettings = require('../../schemas/guildSettings');
+const { Client, Message, EmbedBuilder } = require("discord.js");
+const GuildSettings = require("../../schemas/guildSettings");
 
 module.exports =
 /**
- * 
- * @param {Client} client 
- * @param {Message} message 
+ * @param {Client} client
+ * @param {Message} message
  */
 async (client, message) => {
   const Staff = [
@@ -16,50 +15,56 @@ async (client, message) => {
 
   if (!Staff.includes(message.author.id)) return;
 
-  const args = message.content.trim().split(' ');
+  const args = message.content.trim().split(" ");
   const command = args[0];
   const guildId = args[1];
 
-  if (command !== '-settings' || !guildId) {
+  if (command !== "-settings" || !guildId) {
     return message.reply("❗ Usage: `-settings <guild_id>`");
   }
 
   try {
-    const settings = await GuildSettings.findOne({ guildID: guildId });
-    const guild = client.guilds.cache.get(guildId);
+    const guildData = await GuildSettings.findOne({ guildID: guildId });
 
-    if (!settings) {
-      return message.reply("❗ No settings found for that guild.");
+    if (!guildData) {
+      return message.reply("❗ No settings found for that guild ID.");
     }
 
+    const guild = client.guilds.cache.get(guildId);
+    const owner = guild ? await guild.fetchOwner().catch(() => null) : null;
+
     const embed = new EmbedBuilder()
-      .setTitle("Guild Settings")
+      .setTitle("📋 Guild Settings")
       .setColor("#3498db")
       .addFields(
-        { name: "Guild", value: `${guild?.name || "Unknown"} (${guildId})`, inline: false },
-        { name: "Approved", value: `${settings.approved}`, inline: true },
-        { name: "Referral Code", value: `${settings.referralCode || "None"}`, inline: true },
-        { name: "Enabled", value: `${settings.enabled}`, inline: true },
-        { name: "Hide Bumps", value: `${settings.hideBumps}`, inline: true },
-        { name: "Channel ID", value: `${settings.channelID || "None"}`, inline: true },
-        { name: "Invite Channel ID", value: `${settings.inviteChannelID || "None"}`, inline: true },
-        { name: "Message", value: `${settings.message || "None"}`, inline: false },
-        { name: "Bump Count", value: `${settings.BumpCount}`, inline: true },
-        { name: "Reminder", value: `${settings.reminder}`, inline: true },
-        { name: "Autobump", value: `${settings.autobump}`, inline: true },
-        { name: "Invite Link", value: `${settings.inviteLink || "None"}`, inline: false },
-        { name: "Cooldown End", value: settings.cooldownEnd ? `<t:${Math.floor(settings.cooldownEnd)}:F>` : "0", inline: true },
-        { name: "Last Bumped Channel", value: `${settings.lastBumpedChannel || "None"}`, inline: true },
-        { name: "Last Bumped User", value: `${settings.lastBumpedUser || "None"}`, inline: true },
-        { name: "Hex Color", value: `${settings.hexColor || "None"}`, inline: true },
-        { name: "Banner URL", value: `${settings.bannerURL || "None"}`, inline: false },
+        { name: "Guild ID", value: guildId, inline: true },
+        { name: "Guild Name", value: guild?.name || "Unknown", inline: true },
+        { name: "Owner", value: owner ? `<@${owner.id}>` : "Unknown", inline: true },
+        { name: "\u200B", value: "\u200B" }, // Spacer
+        { name: "Approved", value: guildData.approved ? "✅" : "❌", inline: true },
+        { name: "Referral Code", value: guildData.referralCode || "None", inline: true },
+        { name: "Enabled", value: guildData.enabled ? "✅" : "❌", inline: true },
+        { name: "Hide Bumps", value: guildData.hideBumps ? "✅" : "❌", inline: true },
+        { name: "Channel ID", value: guildData.channelID || "None", inline: true },
+        { name: "Invite Channel ID", value: guildData.inviteChannelID || "None", inline: true },
+        { name: "Message", value: guildData.message || "None" },
+        { name: "Bump Count", value: guildData.BumpCount.toString(), inline: true },
+        { name: "Reminder", value: guildData.reminder ? "✅" : "❌", inline: true },
+        { name: "Autobump", value: guildData.autobump ? "✅" : "❌", inline: true },
+        { name: "Invite Link", value: guildData.inviteLink || "None" },
+        { name: "Cooldown End", value: guildData.cooldownEnd ? `<t:${Math.floor(guildData.cooldownEnd)}:R>` : "None" },
+        { name: "Last Bumped Channel", value: guildData.lastBumpedChannel || "None", inline: true },
+        { name: "Last Bumped User", value: guildData.lastBumpedUser || "None", inline: true },
+        { name: "Hex Color", value: guildData.hexColor || "None", inline: true },
+        { name: "Banner URL", value: guildData.bannerURL || "None" }
       )
       .setFooter({ text: `Requested by ${message.author.tag}`, iconURL: message.author.displayAvatarURL() })
       .setTimestamp();
 
-    message.reply({ embeds: [embed] });
-  } catch (error) {
-    console.error(`Error fetching settings for guild ${guildId}:`, error);
-    message.reply("❗ An error occurred while fetching the settings.");
+    return message.reply({ embeds: [embed] });
+
+  } catch (err) {
+    console.error("Error retrieving settings:", err);
+    return message.reply("❗ An error occurred while retrieving the settings.");
   }
 };
