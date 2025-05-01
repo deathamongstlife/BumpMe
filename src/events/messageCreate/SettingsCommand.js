@@ -55,8 +55,6 @@ async (client, message) => {
                 { name: "🔗 Invite Link", value: guildData.inviteLink || "Not Set", inline: true },
 
                 { name: "\u200B", value: "**__Metadata__**" },
-                { name: "⏳ Cooldown End", value: guildData.cooldownEnd ? new Date(guildData.cooldownEnd).toLocaleString() : "Not Set", inline: false },
-                { name: "📍 Last Bumped Channel", value: guildData.lastBumpedChannel || "Not Set", inline: true },
                 { name: "👤 Last Bumped User", value: guildData.lastBumpedUser || "Not Set", inline: true },
                 { name: "🎨 Hex Color", value: guildData.hexColor || "Not Set", inline: true },
                 { name: "🖼️ Banner URL", value: guildData.bannerURL || "Not Set", inline: false },
