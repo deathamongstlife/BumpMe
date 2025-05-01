@@ -1,6 +1,6 @@
 const { Client, Message } = require('discord.js');
 const { MongoClient } = require('mongodb');
-const { mongoURI } = require('../../../../.env'); // Make sure your .env file contains the connection string
+const { mongoURI } = require('../../../.env'); // Make sure your .env file contains the connection string
 
 module.exports = async (client, message) => {
     const Staff = [
