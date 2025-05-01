@@ -60,7 +60,7 @@ module.exports = {
                 case 'autobump':
                     if (!isPremium) {
                         const embed = new EmbedBuilder()
-                            .setDescription("💎 Looks like you found a **Premium Feature!** \n > You can purchase premium here: https://bumping.ltd/premium")
+                            .setDescription("💎 Looks like you found a **Premium Feature!** \n > You can purchase premium by joining the support server!")
                             .setColor("FF0000");
                         return interaction.reply({ embeds: [embed], ephemeral: false });
                     }
@@ -72,7 +72,7 @@ module.exports = {
                 case 'hide_bumps':
                     if (!isPremium) {
                         const embed = new EmbedBuilder()
-                            .setDescription("💎 Looks like you found a **Premium Feature!** \n > You can purchase premium here: https://bumping.ltd/upgrade")
+                            .setDescription("💎 Looks like you found a **Premium Feature!** \n > You can purchase premium by joining the support server!")
                             .setColor("FF0000");
                         return interaction.reply({ embeds: [embed], ephemeral: false });
                     }
