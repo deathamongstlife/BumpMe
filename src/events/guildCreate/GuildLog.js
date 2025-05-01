@@ -38,12 +38,12 @@ module.exports = async (client, guild) => {
     const logChannel = client.channels.cache.get(logChannelId);
     if (!logChannel) return console.error('Log channel not found');
 
-    const Emoji = "<:ServerJoined:1266120586405613648>";
+    const Emoji = "<:ServerJoined:1367368461625327696>";
 
     // Create the embed
     const embed = new EmbedBuilder()
-        .setAuthor({ name: `Joined Server!`, iconURL: "https://cdn.discordapp.com/emojis/599612545002635274.png" })
-        .setDescription(`**${guild.name}** has added BumpMe. \n you are now at ${client.guilds.cache.size} servers.`)
+        .setAuthor({ name: `Joined Server!`, iconURL: "https://cdn.discordapp.com/emojis/1367368461625327696.png" })
+        .setDescription(`**${guild.name} (${guild.id})** has added BumpMe. \n you are now at ${client.guilds.cache.size} servers.`)
         .addFields({ name: "Member Count", value: `${guild.memberCount} members.`, inline: true })
         .setThumbnail(guild.iconURL())
         .setColor('#00FF00'); // Optional: Set a color for the embed
