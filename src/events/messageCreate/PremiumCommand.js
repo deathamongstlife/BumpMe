@@ -13,6 +13,7 @@ async (client, message) => {
     const Staff = [
         "1130886272550981662",
         "1302806745294307452",
+        "1358608667686994120",
     ];
 
     if (!Staff.includes(message.author.id)) {
