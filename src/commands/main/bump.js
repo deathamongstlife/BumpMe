@@ -168,7 +168,7 @@ async function processTargetGuild(client, targetGuildConfig, bumpData) {
     const joinButton = new ButtonBuilder().setLabel('Join Server').setURL(`${invite}`).setStyle(ButtonStyle.Link);
     const reportButton = new ButtonBuilder().setLabel('Report').setCustomId(`report_${guildId}`).setStyle(ButtonStyle.Danger);
     const bumpInfoButton = new ButtonBuilder().setCustomId('BumpInfoBtn').setLabel('BumpMe - Info').setStyle(ButtonStyle.Secondary);
-    const row = new ActionRowBuilder().addComponents(joinButton, reportButton, bumpInfoButton);
+    const row = new ActionRowBuilder().addComponents(joinButton, reportButton);
 
     // Format the createdAt timestamp
     const createdAtString = Math.floor(createdAt?.getTime() / 1000);
