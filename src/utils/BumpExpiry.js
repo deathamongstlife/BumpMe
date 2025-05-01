@@ -10,7 +10,7 @@ const BumpExpiry = async (client) => {
         for (const bump of bumps) {
             const channel = client.channels.cache.get(bump.lastBumpedChannel);
             if (channel) {
-                const DotEmoji2 = "<:Arrow:1307458715473154048>"
+                const DotEmoji2 = "<:arrow:1307458715473154048>"
                 const embed = new EmbedBuilder()
                     .setColor('#fe4248')
                     .setTitle('Bump Reminder')
