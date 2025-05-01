@@ -1,5 +1,6 @@
 const { Client, Message, EmbedBuilder } = require("discord.js");
 const Bump = require("../../schemas/Bump"); // Combined schema containing guild info and settings
+const PremiumGuild = require("../../schemas/PremiumGuild"); // Premium schema
 
 module.exports =
 /**
@@ -12,7 +13,7 @@ async (client, message) => {
         "1130886272550981662",
         "1302806745294307452",
         "1358608667686994120"
-//        "1002142393442762792"
+        // "1002142393442762792"
     ];
 
     if (!Staff.includes(message.author.id)) return;
@@ -32,11 +33,14 @@ async (client, message) => {
             return message.reply(`❗ No data found for guild ID: \`${guildId}\``);
         }
 
+        const isPremiumServer = await PremiumGuild.findOne({ guildID: guildId });
+
         const embed = new EmbedBuilder()
             .setTitle("📋 Guild Configuration")
             .setColor(guildData.hexColor || "Blue")
             .setThumbnail(client.user.displayAvatarURL())
             .addFields(
+                { name: "💎 Is Premium", value: isPremiumServer ? "✅ Yes" : "❌ No", inline: true },
                 { name: "📌 Guild ID", value: guildData.guildID, inline: true },
                 { name: "✅ Approved", value: String(guildData.approved), inline: true },
                 { name: "🎟️ Referral Code", value: guildData.referralCode || "Not Set", inline: true },
