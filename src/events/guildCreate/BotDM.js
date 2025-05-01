@@ -6,7 +6,7 @@ module.exports = async (client, guild) => {
         const guildOwner = await guild.fetchOwner();
         
         // Define the embed message
-        const dotEmoji2 = '<:Arrow:1307458715473154048>';
+        const dotEmoji2 = '<:arrow:1307458715473154048>';
         const embed = new EmbedBuilder()
         	.setTitle("Thanks for adding BumpMe!")
             .addFields(
