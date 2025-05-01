@@ -343,7 +343,7 @@ module.exports = {
                 .setTitle('Missing Setup Requirements')
                 .setDescription(errorMessage || "No additional details provided.")
             	.setFooter({
-                    text: If you need help,join our support server
+                    text: 'If you need help,join our support server'
                 })
             return await interaction.editReply({ embeds: [errorEmbed], ephemeral: false });
         }
