@@ -410,8 +410,6 @@ module.exports = {
 
         const everyoneRole = interaction.guild.roles.everyone;
         const missingPermissions = [];
-        const dotEmoji = '<:arrow:1307458715473154048>';
-
         if (!bumpChannel.permissionsFor(everyoneRole).has('ViewChannel')) {
             missingPermissions.push(`${dotEmoji} View Channel (@everyone)`);
         }
